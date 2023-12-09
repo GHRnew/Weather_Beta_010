@@ -1,0 +1,67 @@
+{
+    "WeinheimerStr_55": {
+        "lat": 49.5462349,
+        "lon": 8.6717458,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "de",
+        "running_period": "each_start",
+        "store_all_responses": "yes"
+    },
+    "Test_Rudolstadt": {
+        "lat": 50.699475,
+        "lon": 11.38418333,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "de",
+        "store_all_responses": "yes",
+        "running_period": "no_run"
+    }, 
+    "LitzelhardStr_21": {
+        "lat": 48.99016389,
+        "lon": 8.384788889,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "de",
+        "store_all_responses": "yes",
+        "running_period": "each_start"
+    },
+    "EttlingerStr_8": {
+        "lat": 48.9298,
+        "lon": 8.389822222,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "de",
+        "store_all_responses": "yes",
+        "running_period": "each_start"
+    },
+    "Pertinjska_31": {
+        "lat": 45.81017778,
+        "lon": 15.98004167,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "hr",
+        "store_all_responses": "yes",
+        "running_period": "full_hour_only"
+    }, 
+    "MorrisCourt_4": {
+        "lat": 40.95970556,
+        "lon": -72.2935,
+        "time_zone": "EST",
+        "units": "metric",
+        "lang": "en",
+        "store_all_responses": "yes",
+        "running_period": "no_run"
+    },
+    "MorrisCourt_4imp": {
+        "lat": 40.95970556,
+        "lon": -72.2935,
+        "time_zone": "EST",
+        "units": "imperial",
+        "lang": "en",
+        "running_period": "each_start",
+        "store_all_responses": "yes"
+    }
+}
+
+
