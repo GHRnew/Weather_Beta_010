@@ -5,7 +5,7 @@ import os
 import sys
 import requests
 import logging
-
+# from HUB
 API30_KEY = os.environ["OPENWEATHERMAP_ONE_CALL_API30_KEY"]
 
 LOCATION_NAME = sys.argv[1]  # The first argument is the script name, so we use the second one.
