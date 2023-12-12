@@ -49,14 +49,14 @@ def setup_logging():
 def run_script_unix(script_name, location, logger):
     try:
         script_path = os.path.join(os.path.dirname(__file__), script_name)
-        venv_path = '/volume1/GHR_python_env'
+        venv_path = '/volume1/GHR_weather_env'
         command = f'source {venv_path}/bin/activate && python3 {script_path} {location}'
         subprocess.run(command, shell=True, check=True)
         logger.info(f"Successfully ran {script_name} for {location} on Unix")
     except subprocess.CalledProcessError as e:
         logger.error(f"Error running {script_name} for {location} on Unix: {e}")
         logger.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-        sys.exit(1)
+        # sys.exit(1)
 
 
 def run_script_windows(script_name, location, logger):
@@ -69,7 +69,7 @@ def run_script_windows(script_name, location, logger):
     except subprocess.CalledProcessError as e:
         logger.error(f"Error running {script_name} for {location} on Windows: {e}")
         logger.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-        sys.exit(1)
+        # sys.exit(1)
 
 
 def should_run_script_for_location(running_period, time_now):
@@ -83,7 +83,7 @@ def should_run_script_for_location(running_period, time_now):
 
 
 # Default: Check if the script_name may run
-# The script 005_B_Log_API_response.py may run onlz if within 30 sec past the full hour.
+# The script 005_B_Log_API_response.py may run only if within 30 sec past the full hour.
 # Must be combined with the locations.json and trigger times within Synology Task Scheduler
 def should_run_script_at_all(script_name, time_now):
     if script_name == "005_B_Log_API_response.py":
@@ -135,11 +135,11 @@ def main():
                 if should_run_script_at_all(script, time_now):
                     run_script(script, location, logger)
                 else:
-                    logger.info(f"Skipping {script} due to time-based condition")
+                    logger.info(f"Skipping {script} as 'should_run_script_at_all returns 'no'.")
         else:
-            logger.info(f"Skipping scripts for {location} due to running_period settings")
+            logger.info(f"Skipping {location} as 'should_run_script_for_location' returns 'no'.")
 
-    logger.info("Finished processing all scripts")
+    logger.info("Finished processing all scripts =====================================================================================")
 
 
 if __name__ == "__main__":

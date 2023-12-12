@@ -6,25 +6,8 @@
         "units": "metric",
         "lang": "de",
         "running_period": "each_start",
-        "store_all_responses": "yes"
-    },
-    "Test_Rudolstadt": {
-        "lat": 50.699475,
-        "lon": 11.38418333,
-        "time_zone": "CET",
-        "units": "metric",
-        "lang": "de",
         "store_all_responses": "yes",
-        "running_period": "no_run"
-    }, 
-    "LitzelhardStr_21": {
-        "lat": 48.99016389,
-        "lon": 8.384788889,
-        "time_zone": "CET",
-        "units": "metric",
-        "lang": "de",
-        "store_all_responses": "yes",
-        "running_period": "each_start"
+        "local_api": "yes"
     },
     "EttlingerStr_8": {
         "lat": 48.9298,
@@ -33,7 +16,18 @@
         "units": "metric",
         "lang": "de",
         "store_all_responses": "yes",
-        "running_period": "each_start"
+        "running_period": "each_start",
+        "local_api": "yes"
+    },
+    "LitzelhardStr_21": {
+        "lat": 48.99016389,
+        "lon": 8.384788889,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "de",
+        "store_all_responses": "yes",
+        "running_period": "each_start",
+        "local_api": "no"
     },
     "Pertinjska_31": {
         "lat": 45.81017778,
@@ -42,7 +36,38 @@
         "units": "metric",
         "lang": "hr",
         "store_all_responses": "yes",
-        "running_period": "full_hour_only"
+        "running_period": "each_start",
+        "local_api": "no"
+    },
+    "Varazdinske_Toplice": {
+        "lat": 46.21092778,
+        "lon": 16.419025,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "hr",
+        "store_all_responses": "yes",
+        "running_period": "full_hour_only",
+        "local_api": "no"
+    }, 
+    "Brac_Sumartin": {
+        "lat": 43.28574444,
+        "lon": 16.86895833,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "hr",
+        "store_all_responses": "yes",
+        "running_period": "full_hour_only",
+        "local_api": "no"
+    }, 
+    "Motovun_Livade": {
+        "lat": 45.35775278,
+        "lon": 13.83329167,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "hr",
+        "store_all_responses": "yes",
+        "running_period": "full_hour_only",
+        "local_api": "no"
     }, 
     "MorrisCourt_4": {
         "lat": 40.95970556,
@@ -51,7 +76,8 @@
         "units": "metric",
         "lang": "en",
         "store_all_responses": "yes",
-        "running_period": "no_run"
+        "running_period": "no_run",
+        "local_api": "no"
     },
     "MorrisCourt_4imp": {
         "lat": 40.95970556,
@@ -59,8 +85,9 @@
         "time_zone": "EST",
         "units": "imperial",
         "lang": "en",
-        "running_period": "each_start",
-        "store_all_responses": "yes"
+        "running_period": "full_hour_only",
+        "store_all_responses": "yes",
+        "local_api": "no"
     }
 }
 

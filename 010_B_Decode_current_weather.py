@@ -1,5 +1,6 @@
-# <WeinheimerStr_55>.json   --->   010_B_Decode_current_weather.py   --->   <WeinheimerStr_55>_current_weather.txt
-#                                                                           <WeinheimerStr_55>_current_weather.jpeg
+# <WeinheimerStr_55>.json               --->   010_B_Decode_current_weather.py   --->   <WeinheimerStr_55>_current_weather.txt
+# <WeinheimerStr_55>_urlResponse.json   --->                                            <WeinheimerStr_55>_urlResponse.txt
+#                                                                                       <WeinheimerStr_55>_current_weather.jpeg
 
 import json
 import os
@@ -53,7 +54,7 @@ def append_units(key, value, unit_type):
     return f"{value}{units.get(key, '')}"
 
 
-def read_and_format_current_weather(json_file_path, time_zone, unit_type, logger):
+def read_and_format_current_weather(json_file_path, time_zone, unit_type, logger, local_api_data=""):
     try:        
         with open(json_file_path, 'r', encoding='utf-8') as file:
             logger.info(f"Reading weather data from {json_file_path}")
@@ -86,8 +87,12 @@ def read_and_format_current_weather(json_file_path, time_zone, unit_type, logger
                 value = append_units(key, value, unit_type)  # Pass the unit_type here
 
             formatted_data += f"{key.replace('_', ' ').title()}: {value}\n"
-
-        logger.info("Successfully processed and formatted current weather data.")
+        
+        # Append local API data if available
+        if local_api_data:
+            formatted_data += "\nLocal Data:\n" + local_api_data
+            logger.info("Successfully processed and formatted current weather data.")
+        
         return formatted_data    
     except json.JSONDecodeError as e:
         logger.error(f"Error decoding JSON from file {json_file_path}: {e}")
@@ -159,6 +164,26 @@ def extract_parameter_value(location_config, parameter_name, logger, location_na
     return value
 
 
+def process_local_api_data(json_file_path_local, logger):
+    try:
+        with open(json_file_path_local, 'r', encoding='utf-8') as file:
+            local_data = json.load(file)        
+        # Extract the temperature data
+        local_temperature = local_data.get("temperatureInC", "Data not available")
+        formatted_local_data = f"Locally measured Temperature: {local_temperature}°C\n"
+        return formatted_local_data
+    except json.JSONDecodeError as e:
+        logger.error(f"Error decoding JSON from file {json_file_path_local}: {e}")
+        logger.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+    except FileNotFoundError:
+        logger.error(f"Local API data file not found: {json_file_path_local}")
+        logger.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+    except Exception as e:
+        logger.exception(f"Error processing local API data: {e}")
+        logger.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+    return ""
+
+
 def main():
     
     #region COMMON CODE START -------------------------------------------------------------------
@@ -223,9 +248,19 @@ def main():
             # LOCATION_NAME is given for a logging purposes only.
             unit_type = extract_parameter_value(location_config, 'units', logger, LOCATION_NAME)
             time_zone = extract_parameter_value(location_config, 'time_zone', logger, LOCATION_NAME)
+            local_api = extract_parameter_value(location_config, 'local_api', logger, LOCATION_NAME)
 
-            # Read json data, such as "WeinheimerStr_51,json" and convert to the output format
-            formatted_data = read_and_format_current_weather(json_file_path, time_zone, unit_type, logger)
+            # If there are some local data, like in WeinheimerStr_55_urlResponse.json (temperature an Dario and Goran location)
+            # read, process and return them
+            local_api_data = ""
+            if local_api == "yes":
+                json_file_name_local = f"{LOCATION_NAME}_urlResponse.json"
+                json_file_path_local = os.path.join(script_path, weather_data_directoryName, json_file_name_local)
+                local_api_data = process_local_api_data(json_file_path_local, logger)
+
+            # Read json data, such as "WeinheimerStr_51,json", and return them formated
+            # New: Add the local_api_data, as defined above
+            formatted_data = read_and_format_current_weather(json_file_path, time_zone, unit_type, logger, local_api_data)
             # Save the formated data to a file 
             write_to_file(LOCATION_NAME, output_file_path, formatted_data, logger)
 

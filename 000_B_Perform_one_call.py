@@ -1,17 +1,19 @@
-# locations <WeinheimerStr_55> --> 000_B_Perform_one_call.py (API) -->  <WeinheimerStr_55>.json
+# locations <WeinheimerStr_55> -->  000_B_Perform_one_call.py (CallAPI_saveJSON - openweathermap API)  -->  <WeinheimerStr_55>.json
+#                                   000_B_Perform_one_call.py (CallLocalAPI_saveJSON - temperatur API) -->  <WeinheimerStr_55>_urlResponse.json
 
 import json
 import os
 import sys
 import requests
 import logging
-# from HUB
+
 API30_KEY = os.environ["OPENWEATHERMAP_ONE_CALL_API30_KEY"]
 
 LOCATION_NAME = sys.argv[1]  # The first argument is the script name, so we use the second one.
 # Load the location name from command-line arguments
 # LOCATION_NAME = "WeinheimerStr_55"
-# LOCATION_NAME ="EttlingerStr_8"
+# LOCATION_NAME = "EttlingerStr_8"
+# LOCATION_NAME = "LitzelhardStr_21"
 
 
 def load_locations_data(locations_data_fileanme, location_name, logger):
@@ -81,6 +83,38 @@ def CallAPI_saveJSON(location_config, json_filename, logger, location_name_for_l
         sys.exit(1)
 
 
+def CallLocalAPI_saveJSON(json_filename, logger, location_name):
+    # Read the URL from the environment variable
+    env_var_name = f"{location_name}_url"
+    local_api_url = os.environ.get(env_var_name)
+
+    if not local_api_url:
+        logger.error(f"URL environment variable '{env_var_name}' not found.")
+        sys.exit(1)
+        logger.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+
+    # Perform the local API call
+    try:
+        logger.info(f"Fetching additional data from {local_api_url}")
+        response = requests.get(local_api_url, timeout=10)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error fetching data from local API: {e}")
+        sys.exit(1)
+        logger.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+
+    # Save the response content to a file
+    try:
+        with open(json_filename, 'w') as file:
+            json.dump(response.json(), file, indent=4)
+            logger.info(f"Additional data saved successfully to {json_filename}")
+    except IOError as e:
+        logger.error(f"Error writing additional data to file: {json_filename}: {e}")
+        sys.exit(1)
+        logger.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+
+
+
 def main():
 
     #region COMMON CODE START -------------------------------------------------------------------
@@ -135,7 +169,14 @@ def main():
         # Fetch the data from the API and store it to the "WeinheimerStr_55.json"
         # LOCATION_NAME is given for a logging purposes only.
         CallAPI_saveJSON(location_config, json_file_path, logger, LOCATION_NAME)
-    
+
+        # Check if local_api is set to 'yes' and call the local API
+        local_api = location_config.get('local_api', 'no')  # default to 'no' if not found
+        if local_api == 'yes':
+            json_file_name_local = f"{LOCATION_NAME}_urlResponse.json"
+            json_file_path_local = os.path.join(script_path, weather_data_path, json_file_name_local)
+            CallLocalAPI_saveJSON(json_file_path_local, logger, LOCATION_NAME)
+
         logger.info("OK, FINISHED NORMALLY -------------------------------------------------------------------------------")
     
     except Exception as e:

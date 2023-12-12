@@ -48,7 +48,7 @@ def plot_precipitation_data(data, location, jpeg_file_path, logger):
     plt.ylabel('Precipitation (mm)')
     
     # Update the title to reflect changes
-    plt.title(f'One Hour Minutely Precipitation Forecast for {location}')
+    plt.title(f'One Hour Minutely Precipitation (oborine) Forecast for {location}')
     
     plt.grid(True)
     plt.xticks(rotation=0)

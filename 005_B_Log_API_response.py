@@ -116,15 +116,15 @@ def main():
 
     # Create a logger object
     logger = logging.getLogger()
-    logger.setLevel(logging.INFO)  # Set the logger's level
+    logger.setLevel(logging.FATAL)  # Set the logger's level
     # Create a handler for writing to a file
     file_handler = logging.FileHandler(absolute_log_filename)
-    file_handler.setLevel(logging.INFO)  # Set the file handler's level
+    file_handler.setLevel(logging.FATAL)  # Set the file handler's level
     file_handler.setFormatter(logging.Formatter(f'%(asctime)s {script_name} %(levelname)s: %(message)s'))
     
     # Create a handler for writing to the console
     stream_handler = logging.StreamHandler()
-    stream_handler.setLevel(logging.INFO)  # Set the stream handler's level
+    stream_handler.setLevel(logging.FATAL)  # Set the stream handler's level
     stream_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s'))
     # Add both handlers to the logger
     logger.addHandler(file_handler)
