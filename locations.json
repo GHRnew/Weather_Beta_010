@@ -1,7 +1,7 @@
 {
     "WeinheimerStr_55": {
-        "lat": 49.5462349,
-        "lon": 8.6717458,
+        "lat": 49.53009,
+        "lon": 8.666003,
         "time_zone": "CET",
         "units": "metric",
         "lang": "de",
@@ -20,6 +20,16 @@
         "local_api": "yes"
     },
     "LitzelhardStr_21": {
+        "lat": 48.99016389,
+        "lon": 8.384788889,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "de",
+        "store_all_responses": "yes",
+        "running_period": "each_start",
+        "local_api": "no"        
+    },
+    "LangerAnger_191": {
         "lat": 48.99016389,
         "lon": 8.384788889,
         "time_zone": "CET",
@@ -77,6 +87,16 @@
         "lang": "en",
         "store_all_responses": "yes",
         "running_period": "no_run",
+        "local_api": "no"
+    },
+    "ViaAntonioCantore_17": {
+        "lat": 41.91843,
+        "lon": 12.46406,
+        "time_zone": "CET",
+        "units": "metric",
+        "lang": "en",
+        "store_all_responses": "yes",
+        "running_period": "each_start",
         "local_api": "no"
     },
     "MorrisCourt_4imp": {
