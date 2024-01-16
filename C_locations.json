@@ -7,7 +7,10 @@
         "lang": "de",
         "running_period": "each_start",
         "store_all_responses": "yes",
-        "local_api": "yes"
+        "local_api": {
+            "temp_stromsensor": "https://djangology.synology.me:47114/current_temperature",
+            "temp_batteriesensor": "http://192.168.178.133/current_temperature"
+        }
     },
     "EttlingerStr_8": {
         "lat": 48.9298,
@@ -17,7 +20,9 @@
         "lang": "de",
         "store_all_responses": "yes",
         "running_period": "each_start",
-        "local_api": "yes"
+        "local_api": {
+            "temp_stromsensor": "https://dksynology.synology.me:52548/current_temperature"
+        }
     },
     "LitzelhardStr_21": {
         "lat": 48.99016389,
@@ -27,7 +32,7 @@
         "lang": "de",
         "store_all_responses": "yes",
         "running_period": "each_start",
-        "local_api": "no"        
+        "local_api": {}      
     },
     "LangerAnger_191": {
         "lat": 48.99016389,
@@ -37,7 +42,7 @@
         "lang": "de",
         "store_all_responses": "yes",
         "running_period": "each_start",
-        "local_api": "no"
+        "local_api": {}
     },
     "Pertinjska_31": {
         "lat": 45.81017778,
@@ -47,7 +52,7 @@
         "lang": "hr",
         "store_all_responses": "yes",
         "running_period": "full_hour_only",
-        "local_api": "no"
+        "local_api": {}
     },
     "Varazdinske_Toplice": {
         "lat": 46.21092778,
@@ -57,7 +62,7 @@
         "lang": "hr",
         "store_all_responses": "yes",
         "running_period": "full_hour_only",
-        "local_api": "no"
+        "local_api": {}
     }, 
     "Brac_Sumartin": {
         "lat": 43.28574444,
@@ -67,7 +72,7 @@
         "lang": "hr",
         "store_all_responses": "yes",
         "running_period": "full_hour_only",
-        "local_api": "no"
+        "local_api": {}
     }, 
     "Motovun_Livade": {
         "lat": 45.35775278,
@@ -77,7 +82,7 @@
         "lang": "hr",
         "store_all_responses": "yes",
         "running_period": "full_hour_only",
-        "local_api": "no"
+        "local_api": {}
     }, 
     "MorrisCourt_4": {
         "lat": 40.95970556,
@@ -87,7 +92,7 @@
         "lang": "en",
         "store_all_responses": "yes",
         "running_period": "no_run",
-        "local_api": "no"
+        "local_api": {}
     },
     "ViaAntonioCantore_17": {
         "lat": 41.91843,
@@ -97,7 +102,7 @@
         "lang": "en",
         "store_all_responses": "yes",
         "running_period": "full_hour_only",
-        "local_api": "no"
+        "local_api": {}
     },
     "MorrisCourt_4imp": {
         "lat": 40.95970556,
@@ -107,7 +112,7 @@
         "lang": "en",
         "running_period": "full_hour_only",
         "store_all_responses": "yes",
-        "local_api": "no"
+        "local_api": {}
     }
 }
 
